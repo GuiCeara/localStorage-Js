@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/index.css">
     <title>Sign-In</title>
 </head>
 <body>
-    
-    <input type="text" id="user" required>
-    <input type="password" id="password" required>
-    <button id="submit">Sign-in!</button>
+
+    <div class="container-login">
+
+        <div class="inputs-text">
+            <h1 class="text">Login</h1>
+            <input type="text" id="user" class="inputs" placeholder="Usuário">
+            <input type="password" id="password" class="inputs" placeholder="Senha">
+        </div>
+        <a href="" class="text-cad">Cadastre-se</a>
+
+        <button id="submit">Sign-in!</button>
+    </div>
+
+
 
     <script src="JS/index.js"></script>
 
