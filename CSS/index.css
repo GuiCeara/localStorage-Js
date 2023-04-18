@@ -6,7 +6,7 @@
     flex-direction: column;
     width: 500px;
     height: 500px;
-    background-color: gray;
+    background-color: rgba(128, 128, 128, 0.795);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -16,6 +16,7 @@
 
 .container-login .inputs-text{
     margin-top: 120px;
+    /* 100 */
 }
 
 .container-login .inputs {
@@ -27,7 +28,15 @@
     font-size: 18px;
 }
 
-.container-login #submit {
+.container-login #confirmPassword{
+    display: none;
+}
+
+.container-login #submitCad {
+    display: none;
+}
+
+.container-login .submits {
     height: 50px;
     width: 100px;
     margin: 0 auto;
@@ -45,8 +54,22 @@
     text-decoration: none;
 }
 
-.text, #submit, .inputs{
+.text, .submits, .inputs, #span{
     font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Alerts */
+.container-login .alerts-span{
+    /* display: none; */
+    position: relative;
+    /* background-color: rgba(58, 215, 44, 0.593); */
+    /* font-size: 25px; */
+    position: absolute;
+    top: 40px;
+    left: 25px;
+    width: 90%;
+    height: 15%;
+    border-radius: 20px;
 }
 
 
