@@ -1,7 +1,19 @@
-let usersList = JSON.parse(localStorage.getItem('users')) || []
 const user = document.getElementById('user')
 const pass = document.getElementById('password')
 const confirmPasswordInput = document.getElementById('confirmPassword')
+let usersList = JSON.parse(localStorage.getItem('users')) || []
+
+if (usersList.length < 1) {
+    window.onload = () => {
+        const users = {
+            user: "",
+            password: ""
+        }
+        usersList.push(users)
+        usersJson = JSON.stringify(usersList)
+        localStorage.setItem("users", usersJson)
+    }
+}
 
 function verify(userName, userPassWord, usersList) {
     if (usersList.length === 0){
@@ -59,7 +71,7 @@ function alerts(text, color) {
     alert_div.style.display = 'block'
     setInterval(() => {
         alert_div.style.display = 'none'
-    }, 3000)
+    }, 5000)
     alert_span.innerHTML = text
 }
 
@@ -110,6 +122,7 @@ buttonLog.addEventListener('click', () => {
     buttonCad.style.display = 'block'
     text.innerHTML = 'Login'
     confirmPasswordInput.style.display = 'none'
+    confirmPasswordInput.value = ''
     user.value = ''
     pass.value = ''
 
@@ -131,6 +144,7 @@ submit.addEventListener('click', () => {
         else {
             if (verify(userName, userPassWord, usersList) == true) {
                 alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
+                // logar no site
             }
             else{
                 alerts('Usuário já existente', 'rgba(215,44,44,0.593)')

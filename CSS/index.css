@@ -26,6 +26,7 @@
     width: 300px;
     margin-bottom: 25px;
     font-size: 18px;
+    outline: none;
 }
 
 .container-login #confirmPassword{
@@ -64,7 +65,7 @@
 
 /* Alerts */
 .container-login .alerts-span{
-    /* display: none; */
+    display: none;
     position: relative;
     /* background-color: rgba(58, 215, 44, 0.593); */
     /* font-size: 25px; */
