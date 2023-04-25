@@ -75,12 +75,28 @@ function alerts(text, color) {
     alert_span.innerHTML = text
 }
 
+function gToken(userName) {
+    let token = Math.random().toString(16).substr(2)
+    let userToken = [token, userName]
+    tokenJson = JSON.stringify(userToken)
+    localStorage.setItem("token", tokenJson)
+    
+}
+
 let button = document.getElementById('submit')
 let buttonCad = document.getElementById('text-cad')
 let buttonLog = document.getElementById('text-log')
 let inputs_text = document.querySelector('.inputs-text')
 let text = document.querySelector('.text')
 let submit = document.getElementById('submitCad')
+
+window.onload = () => {
+    let userTool = JSON.parse(localStorage.getItem('tools'))
+    if (userTool) {
+        alerts(userTool[0], userTool[1])
+        localStorage.removeItem('tools')
+    }
+}
 
 button.addEventListener('click', () => {
 
@@ -92,7 +108,8 @@ button.addEventListener('click', () => {
     }else{
         if (buscar(userName, userPassWord, usersList, verifyN = 1) == true){
             alerts('Usuário Logado!', 'rgba(58, 215, 44, 0.593)')
-            // logar no site
+            gToken(userName)
+            window.location.href = './pages/homepage.html'
         }else{
             alerts('Usuário ou senha incorretos...', 'rgba(215,44,44,0.593)')
         }
@@ -144,7 +161,8 @@ submit.addEventListener('click', () => {
         else {
             if (verify(userName, userPassWord, usersList) == true) {
                 alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
-                // logar no site
+                gToken(userName)
+                window.location.href = './pages/homepage.html'
             }
             else{
                 alerts('Usuário já existente', 'rgba(215,44,44,0.593)')
