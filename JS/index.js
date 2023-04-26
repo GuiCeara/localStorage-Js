@@ -1,10 +1,12 @@
 const user = document.getElementById('user')
 const pass = document.getElementById('password')
 const confirmPasswordInput = document.getElementById('confirmPassword')
+const inputPic = document.querySelector('.pic')
 let usersList = JSON.parse(localStorage.getItem('users')) || []
 
 if (usersList.length < 1) {
-    window.onload = () => {
+    const userExists = usersList.some(user => user.user !== '' && user.password !== '')
+    if (!userExists) {
         const users = {
             user: "",
             password: ""
@@ -20,12 +22,17 @@ function verify(userName, userPassWord, usersList) {
         cadastrar(userName, userPassWord, usersList)
     }else{
         if (buscar(userName, userPassWord, usersList, verifyN = 0) == false){
-            if(cadastrar(userName, userPassWord, usersList) == true){
-                return true
+            if (addImage(userName) == true){
+
+                // TERMINAR
+                if(cadastrar(userName, userPassWord, usersList) == true){
+                    return true
+                }
+                else{
+                    return false
+                }
             }
-            else{
-                return false
-            }
+
         }
         else{
             return false
@@ -80,7 +87,6 @@ function gToken(userName) {
     let userToken = [token, userName]
     tokenJson = JSON.stringify(userToken)
     localStorage.setItem("token", tokenJson)
-    
 }
 
 let button = document.getElementById('submit')
@@ -89,6 +95,32 @@ let buttonLog = document.getElementById('text-log')
 let inputs_text = document.querySelector('.inputs-text')
 let text = document.querySelector('.text')
 let submit = document.getElementById('submitCad')
+const inputFile = document.getElementById('input-img')
+
+function addImage(userName) {
+    user.style.display = 'none'
+    pass.style.display = 'none'
+    confirmPasswordInput.style.display = 'none'
+    text.innerHTML = 'Foto de Perfil'
+    buttonLog.style.display = 'none'
+    inputPic.style.display = 'flex'
+    inputFile.addEventListener('change', function() {
+        const reader = new FileReader()
+        reader.readAsDataURL(inputFile.files[0])
+        reader.onload = function() {
+          const data = {
+            image: reader.result,
+            user: userName
+          }
+          const dataJson = JSON.stringify(data)
+          localStorage.setItem('data', dataJson)
+          return true
+        }
+      })
+    //   console.log(JSON.parse(localStorage.getItem('data')))
+
+    
+}
 
 window.onload = () => {
     let userTool = JSON.parse(localStorage.getItem('tools'))
@@ -160,9 +192,10 @@ submit.addEventListener('click', () => {
         } 
         else {
             if (verify(userName, userPassWord, usersList) == true) {
-                alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
-                gToken(userName)
-                window.location.href = './pages/homepage.html'
+                
+                // alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
+                // gToken(userName)
+                // window.location.href = './pages/homepage.html'
             }
             else{
                 alerts('Usuário já existente', 'rgba(215,44,44,0.593)')
