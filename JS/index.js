@@ -3,6 +3,7 @@ const pass = document.getElementById('password')
 const confirmPasswordInput = document.getElementById('confirmPassword')
 const inputPic = document.querySelector('.pic')
 let usersList = JSON.parse(localStorage.getItem('users')) || []
+let dataList = JSON.parse(localStorage.getItem('data')) || []
 
 if (usersList.length < 1) {
     const userExists = usersList.some(user => user.user !== '' && user.password !== '')
@@ -14,29 +15,6 @@ if (usersList.length < 1) {
         usersList.push(users)
         usersJson = JSON.stringify(usersList)
         localStorage.setItem("users", usersJson)
-    }
-}
-
-function verify(userName, userPassWord, usersList) {
-    if (usersList.length === 0){
-        cadastrar(userName, userPassWord, usersList)
-    }else{
-        if (buscar(userName, userPassWord, usersList, verifyN = 0) == false){
-            if (addImage(userName) == true){
-
-                // TERMINAR
-                if(cadastrar(userName, userPassWord, usersList) == true){
-                    return true
-                }
-                else{
-                    return false
-                }
-            }
-
-        }
-        else{
-            return false
-        }
     }
 }
 
@@ -83,6 +61,7 @@ function alerts(text, color) {
 }
 
 function gToken(userName) {
+
     let token = Math.random().toString(16).substr(2)
     let userToken = [token, userName]
     tokenJson = JSON.stringify(userToken)
@@ -98,28 +77,28 @@ let submit = document.getElementById('submitCad')
 const inputFile = document.getElementById('input-img')
 
 function addImage(userName) {
+    
     user.style.display = 'none'
     pass.style.display = 'none'
     confirmPasswordInput.style.display = 'none'
     text.innerHTML = 'Foto de Perfil'
     buttonLog.style.display = 'none'
     inputPic.style.display = 'flex'
+
     inputFile.addEventListener('change', function() {
         const reader = new FileReader()
         reader.readAsDataURL(inputFile.files[0])
         reader.onload = function() {
-          const data = {
-            image: reader.result,
-            user: userName
-          }
-          const dataJson = JSON.stringify(data)
-          localStorage.setItem('data', dataJson)
-          return true
+            const data = {
+                image: reader.result,
+                user: userName
+            }
+            dataList.push(data)
+            dataJson = JSON.stringify(dataList)
+            return dataJson
+            // corrigir
         }
       })
-    //   console.log(JSON.parse(localStorage.getItem('data')))
-
-    
 }
 
 window.onload = () => {
@@ -191,11 +170,24 @@ submit.addEventListener('click', () => {
             alerts('As senhas não correspondem.', 'rgba(215,44,44,0.593)')
         } 
         else {
-            if (verify(userName, userPassWord, usersList) == true) {
-                
-                // alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
-                // gToken(userName)
-                // window.location.href = './pages/homepage.html'
+            if (buscar(userName, userPassWord, usersList, verifyN = 0) == false){
+                if(addImage(userName) == usersJson){
+                    alert('teste')
+                    let submitCad = document.getElementById('submitCad')
+                    submitCad.onclick = () => {
+                        // corrigir
+                        if(cadastrar(userName, userPassWord, usersList) == true){
+                            // localStorage.setItem("data", dataJson)
+                            alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
+                            gToken(userName)
+                            window.location.href = './pages/homepage.html'
+                        }
+                        else{
+                            alert('erro')
+                        }
+                    }
+                    
+                }
             }
             else{
                 alerts('Usuário já existente', 'rgba(215,44,44,0.593)')

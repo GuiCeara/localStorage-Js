@@ -8,7 +8,7 @@ window.onload = () => {
     let userToken = JSON.parse(localStorage.getItem('token')) || []
     let token = userToken[0]
     let userName = userToken[1]
-    console.log(token, userName)
+    // console.log(token, userName)
     if (!userToken[0]) {
         window.location.href = '../index.html'
         tool('Usuário não logado.', 'rgba(215,44,44,0.593)')
