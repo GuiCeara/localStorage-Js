@@ -74,18 +74,20 @@ let buttonLog = document.getElementById('text-log')
 let inputs_text = document.querySelector('.inputs-text')
 let text = document.querySelector('.text')
 let submit = document.getElementById('submitCad')
+let pic = document.querySelector(".pic")
 const inputFile = document.getElementById('input-img')
 
-function addImage(userName) {
-    
-    user.style.display = 'none'
-    pass.style.display = 'none'
-    confirmPasswordInput.style.display = 'none'
-    text.innerHTML = 'Foto de Perfil'
-    buttonLog.style.display = 'none'
-    inputPic.style.display = 'flex'
 
-    inputFile.addEventListener('change', function() {
+function addImage(userName) {
+    return new Promise((resolve, reject) => {
+        user.style.display = 'none'
+        pass.style.display = 'none'
+        confirmPasswordInput.style.display = 'none'
+        text.innerHTML = 'Foto de Perfil'
+        buttonLog.style.display = 'none'
+        inputPic.style.display = 'flex'
+        
+        inputFile.addEventListener('change', function() {
         const reader = new FileReader()
         reader.readAsDataURL(inputFile.files[0])
         reader.onload = function() {
@@ -93,12 +95,17 @@ function addImage(userName) {
                 image: reader.result,
                 user: userName
             }
+            // adicionar imagem
+            pic.style.background = reader.result
+
             dataList.push(data)
             dataJson = JSON.stringify(dataList)
-            return dataJson
-            // corrigir
+            resolve(dataJson)
         }
-      })
+        reader.onerror = function() {
+             reject(reader.error)
+        }})
+    })
 }
 
 window.onload = () => {
@@ -171,23 +178,25 @@ submit.addEventListener('click', () => {
         } 
         else {
             if (buscar(userName, userPassWord, usersList, verifyN = 0) == false){
-                if(addImage(userName) == usersJson){
-                    alert('teste')
-                    let submitCad = document.getElementById('submitCad')
+                
+                addImage(userName).then(dataJson => {
+                    let submitCad = document.getElementById('submitCad2')
+                    submitCad.style.display = "block"
+                    submit.style.display = "none"
                     submitCad.onclick = () => {
-                        // corrigir
-                        if(cadastrar(userName, userPassWord, usersList) == true){
-                            // localStorage.setItem("data", dataJson)
-                            alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
-                            gToken(userName)
-                            window.location.href = './pages/homepage.html'
-                        }
-                        else{
-                            alert('erro')
-                        }
+                    if(cadastrar(userName, userPassWord, usersList) == true){
+                        localStorage.setItem("data", dataJson)
+                        alerts('Usuário Cadastrado!', 'rgba(58, 215, 44, 0.593)')
+                        gToken(userName)
+                        window.location.href = './pages/homepage.html'
                     }
+                    else{
+                        window.location.href = '../index.html'
+                    }}
                     
-                }
+                }).catch(error => {
+                    window.location.href = '../index.html'
+                })
             }
             else{
                 alerts('Usuário já existente', 'rgba(215,44,44,0.593)')

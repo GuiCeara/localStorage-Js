@@ -70,6 +70,10 @@
     display: none;
 }
 
+.container-login #submitCad2 {
+    display: none;
+}
+
 .container-login .submits {
     height: 50px;
     width: 100px;
