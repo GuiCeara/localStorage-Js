@@ -60,7 +60,7 @@ function alerts(text, color) {
     alert_span.innerHTML = text
 }
 
-function gToken(userName) {
+function gToken(userName,image) {
 
     let token = Math.random().toString(16).substr(2)
     let userToken = [token, userName]
@@ -96,7 +96,8 @@ function addImage(userName) {
                 user: userName
             }
             // adicionar imagem
-            pic.style.background = reader.result
+            pic.style.backgroundImage = `url('${reader.result}')`
+            pic.style.color = 'white'
 
             dataList.push(data)
             dataJson = JSON.stringify(dataList)
