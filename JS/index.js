@@ -60,9 +60,9 @@ function alerts(text, color) {
     alert_span.innerHTML = text
 }
 
-function gToken(userName,image) {
+function gToken(userName) {
 
-    let token = Math.random().toString(16).substr(2)
+    let token = Math.random().toString(16).substring(2)
     let userToken = [token, userName]
     tokenJson = JSON.stringify(userToken)
     localStorage.setItem("token", tokenJson)
