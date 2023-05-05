@@ -95,7 +95,6 @@ function addImage(userName) {
                 image: reader.result,
                 user: userName
             }
-            // adicionar imagem
             pic.style.backgroundImage = `url('${reader.result}')`
             pic.style.color = 'white'
 
