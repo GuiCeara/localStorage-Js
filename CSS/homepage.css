@@ -12,11 +12,12 @@
 }
 
 .search-box {
-    /* display: contents; */
+    display: none;
     position: absolute;
     background-color: rgba(145, 139, 139, 0.336);
-    width: 15%;
-    height: 300px;
+    width: 20%;
+    height: 225px;
+    /* height: 300px; */
     top: 70px; 
     border-radius: 30px;
     align-items: center;
@@ -34,11 +35,9 @@
 
 .search-box .search-result:hover {
     background-color: rgba(145, 139, 139, 0.336);
-    border-radius: 22px 0px 0px 22px;
+    border-radius: 22px 15px 15px 22px;
     transition: 0.5s;
 }
-
-
 
 .search-box  .search-result .img-result {
     background-color: white;
@@ -46,7 +45,7 @@
     width: 55px;
     height: 55px;
     border: 0.2px solid black;
-    background-image: url("https://saude.abril.com.br/wp-content/uploads/2016/09/calopsita-cuidados-saude-96731.jpg?quality=85&strip=info&w=1000&h=720&crop=1");
+    /* background-image: url("https://saude.abril.com.br/wp-content/uploads/2016/09/calopsita-cuidados-saude-96731.jpg?quality=85&strip=info&w=1000&h=720&crop=1"); */
     background-repeat: no-repeat;
     background-size: cover;
 }

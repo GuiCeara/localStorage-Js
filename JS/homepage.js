@@ -19,15 +19,27 @@ let dataList = JSON.parse(localStorage.getItem("data")) || []
 let usersList = JSON.parse(localStorage.getItem("users")) || []
 let img = document.getElementById('img-profile')
 let search = document.getElementById("search")
+let search_box = document.getElementById("search-box")
 
 function searchUsers(usersList,search) {
 
     let filteredUsers = usersList.filter(user => user.user.includes(search))
     let cont = 0
+    search_box.style.display = "block"
     filteredUsers.forEach(user => {
 
         if(!user.user == "" && !user.password == ""){
-            console.log(`\nResultado: ${cont+=1}\nUsuário: ${user.user}\nSenha: ${user.password}\n`)
+            image = buscarData(user.user, dataList)
+            search_box.innerHTML = `'
+                <div class="search-result">
+                    <div class="img-result" style="background-image: url(${image});"></div>
+                    <label class="name-result">${user.user}</label>
+                </div>
+            '`
+            
+
+
+            // console.log(`\nResultado: ${cont+=1}\nUsuário: ${user.user}\nSenha: ${user.password}\n`)
         }
     });
   
@@ -56,6 +68,8 @@ img.style.backgroundImage = `url('${image}')`
 search.addEventListener("keyup", () => {
 
     searchUsers(usersList,search.value)
+
+
 
     // let result = false;
     // console.log(search.value)
