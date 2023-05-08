@@ -20,6 +20,19 @@ let usersList = JSON.parse(localStorage.getItem("users")) || []
 let img = document.getElementById('img-profile')
 let search = document.getElementById("search")
 let search_box = document.getElementById("search-box")
+let img_input = document.getElementById("img-profile")
+let drop_down = document.getElementById("drop-down")
+let exit_input = document.getElementById("exit-input")
+let i = 1
+
+function dropDown(drop_down, ) {
+    drop_down.style.display = 'block'
+    if (i == 2) {
+        drop_down.style.display = "none"
+        return i--
+    }
+    return i++
+}
 
 function searchUsers(usersList,search) {
     if (search.length > 0) {
@@ -28,7 +41,7 @@ function searchUsers(usersList,search) {
     
         if (search != 0) {
             search_box.style.display = "block"
-            teste = ''
+            result = ''
             filteredUsers.forEach(user => {
                 
                 if(!user.user == "" && !user.password == ""){
@@ -36,15 +49,15 @@ function searchUsers(usersList,search) {
                     image = buscarData(user.user, dataList)
                     search_box.style.height = `calc(${image * cont++})`
                     
-                    teste += `
+                    result += `
                         <div class="search-result">
                             <div class="img-result" style="background-image: url(${image});"></div>
                             <label class="name-result">${user.user}</label>
                         </div>
                     `
                 }
-            });
-            search_box.innerHTML = teste
+            })
+            search_box.innerHTML = result
         }
     }else{
         search_box.innerHTML = ""
@@ -63,21 +76,20 @@ let image = buscarData(userName, dataList)
 img.style.backgroundImage = `url('${image}')`
 
 search.addEventListener("keyup", () => {
-
     searchUsers(usersList,search.value)
-
-
-
-    // let result = false;
-    // console.log(search.value)
-    // // usersList.forEach(i => {
-    // //     if(i.user == search.value){
-    // //         result = 
-    // //     }
-    // // })
-    // // return result;   
-
-    // // expressões regulares!
-    
 })
+
+img_input.addEventListener("click", () => {
+    dropDown(drop_down) 
+    exit_input.onclick = () => {
+        tool('Usuário deslogado.', 'rgba(58, 215, 44, 0.593)')
+        localStorage.removeItem("token")
+        window.location.href = '../index.html'
+    }
+
+})
+
+
+
+
 
