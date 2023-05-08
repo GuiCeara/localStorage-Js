@@ -22,38 +22,35 @@ let search = document.getElementById("search")
 let search_box = document.getElementById("search-box")
 
 function searchUsers(usersList,search) {
-
-    let filteredUsers = usersList.filter(user => user.user.includes(search))
-    let cont = 0
-    search_box.style.display = "block"
-    filteredUsers.forEach(user => {
-
-        if(!user.user == "" && !user.password == ""){
-            image = buscarData(user.user, dataList)
-            search_box.innerHTML = `'
-                <div class="search-result">
-                    <div class="img-result" style="background-image: url(${image});"></div>
-                    <label class="name-result">${user.user}</label>
-                </div>
-            '`
-            
-
-
-            // console.log(`\nResultado: ${cont+=1}\nUsuário: ${user.user}\nSenha: ${user.password}\n`)
+    if (search.length > 0) {
+        let filteredUsers = usersList.filter(user => user.user.includes(search))
+        let cont = 0
+    
+        if (search != 0) {
+            search_box.style.display = "block"
+            teste = ''
+            filteredUsers.forEach(user => {
+                
+                if(!user.user == "" && !user.password == ""){
+                    height = "77px"
+                    image = buscarData(user.user, dataList)
+                    search_box.style.height = `calc(${image * cont++})`
+                    
+                    teste += `
+                        <div class="search-result">
+                            <div class="img-result" style="background-image: url(${image});"></div>
+                            <label class="name-result">${user.user}</label>
+                        </div>
+                    `
+                }
+            });
+            search_box.innerHTML = teste
         }
-    });
-  
-    // let table = document.getElementById("user-table");
-    // table.innerHTML = "";
-  
-    // filteredUsers.forEach(user => {
-    //   let row = table.insertRow();
-    //   let nameCell = row.insertCell(0);
-    //   let emailCell = row.insertCell(1);
-  
-    //   nameCell.innerText = user.name;
-    //   emailCell.innerText = user.email;
-    // });
+    }else{
+        search_box.innerHTML = ""
+        search_box.style.display = 'none'
+    }
+
   }
 
 token = userToken[0]

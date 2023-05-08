@@ -15,8 +15,8 @@
     display: none;
     position: absolute;
     background-color: rgba(145, 139, 139, 0.336);
-    width: 20%;
-    height: 225px;
+    width: 15%;
+    /* height: calc(77px * 3); */
     /* height: 300px; */
     top: 70px; 
     border-radius: 30px;
