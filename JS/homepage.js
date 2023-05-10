@@ -26,6 +26,7 @@ let exit_input = document.getElementById("exit-input")
 let i = 1
 
 function dropDown(drop_down, ) {
+    
     drop_down.style.display = 'block'
     if (i == 2) {
         drop_down.style.display = "none"
@@ -35,20 +36,22 @@ function dropDown(drop_down, ) {
 }
 
 function searchUsers(usersList,search) {
-    if (search.length > 0) {
-        let filteredUsers = usersList.filter(user => user.user.includes(search))
-        let cont = 0
+
     
-        if (search != 0) {
-            search_box.style.display = "block"
-            result = ''
-            filteredUsers.forEach(user => {
-                
+
+   let filteredUsers = usersList.filter(user => user.user.includes(search))
+
+    if (search != 0) {
+
+        search_box.style.display = "block"
+        result = ''
+
+        if (search == "@@all") {
+
+            usersList.forEach(user => {
+            
                 if(!user.user == "" && !user.password == ""){
-                    height = "77px"
                     image = buscarData(user.user, dataList)
-                    search_box.style.height = `calc(${image * cont++})`
-                    
                     result += `
                         <div class="search-result">
                             <div class="img-result" style="background-image: url(${image});"></div>
@@ -57,14 +60,35 @@ function searchUsers(usersList,search) {
                     `
                 }
             })
-            search_box.innerHTML = result
+
         }
+
+        filteredUsers.forEach(user => {
+            
+            if(!user.user == "" && !user.password == ""){
+                image = buscarData(user.user, dataList)
+                result += `
+                    <div class="search-result">
+                        <div class="img-result" style="background-image: url(${image});"></div>
+                        <label class="name-result">${user.user}</label>
+                    </div>
+                `
+            }
+        })
+        
+        if(result != ""){
+            search_box.innerHTML = result
+        }else{
+            search_box.style.display = 'none' 
+        }
+        
+    
     }else{
         search_box.innerHTML = ""
         search_box.style.display = 'none'
     }
 
-  }
+}
 
 token = userToken[0]
 userName = userToken[1]
@@ -85,6 +109,14 @@ img_input.addEventListener("click", () => {
         tool('Usuário deslogado.', 'rgba(58, 215, 44, 0.593)')
         localStorage.removeItem("token")
         window.location.href = '../index.html'
+    }
+
+})
+
+document.addEventListener("click", (e) => {
+    if (!drop_down.contains(e.target) && !drop_down.previousElementSibling.contains(e.target)) {
+        drop_down.style.display = "none"
+        return i--
     }
 
 })
