@@ -1,3 +1,11 @@
+/* Reset Config */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 /* NavBar */
 
 .navbar #img-profile {
@@ -85,6 +93,27 @@
 .container-profile .label-input:hover {
     background-color: rgba(145, 139, 139, 0.336)
 
+}
+
+/* Look Profile */
+.glass {
+    width: 100%;
+    height: 100%;
+    background: rgb(62,62,62);
+    background: linear-gradient(90deg, rgba(62,62,62,0.7) 0%, rgba(113,113,119,0.7) 7%, rgba(190,221,227,0.6965161064425771) 66%);
+    z-index: 1;
+    position: absolute;
+}
+
+#look-profile {
+    z-index: 1;
+    position: absolute;
+    background-color: red;
+    width: 300px;
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
