@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/homepage.css">
+    <link rel="shortcut icon" href="../assets/images/logo/logo-NN.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Nexus Net</title>
 </head>
 <body>
 
-    <div class="glass"></div>
+    <!-- <div class="glass"></div> -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Nexus Net</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +32,10 @@
               </li>
             </ul>
             <div class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" id="search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <div class="search-content">
+                <input class="search-input" type="text" placeholder="Pesquisar" aria-label="Search" id="search">
+                <label for="search" class="icon-search"></label>
+              </div>
               <div class="search-box" id="search-box"></div>
             </div>
 
@@ -42,18 +45,16 @@
               <label class="label-input">Ajuda e suporte</label>
               <label class="label-input">Amigos</label>
               <label class="label-input">Configurações</label>
-              <label class="label-input" id="exit-input">Sair</label>
-              
-            
+              <label class="label-input" id="exit-input">Sair</label>          
             </div>
           </div>
         </div>
       </nav>
 
-      <div class="container-fluid content">
-        <div id="look-profile">
+      <div class="container content">
+        <!-- <div id="look-profile">
           <h1 id="name-profile"></h1>
-        </div>
+        </div> -->
       </div>
 
 

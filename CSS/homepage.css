@@ -1,9 +1,20 @@
 /* Reset Config */
 
+:root {
+    --primary-color: "";
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
 
 /* NavBar */
@@ -95,12 +106,45 @@
 
 }
 
+/* Search Input */
+
+.search-content {
+    position: relative;
+    align-items: center;
+    display: flex;
+}
+
+.search-input {
+    box-shadow: 0 0 0 0;
+    border: 1px solid black;
+    padding: 5px;
+    outline: 0;
+    position: relative;
+}
+
+
+.icon-search {
+    background-image: url("../assets/icons/search.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0px;
+    border-left: 1px solid gray;
+    
+    
+}
+
 /* Look Profile */
 .glass {
     width: 100%;
     height: 100%;
-    background: rgb(62,62,62);
-    background: linear-gradient(90deg, rgba(62,62,62,0.7) 0%, rgba(113,113,119,0.7) 7%, rgba(190,221,227,0.6965161064425771) 66%);
+
+
+    background-color: #FFFF;
+    /* filter: blur(1000px); */
     z-index: 1;
     position: absolute;
 }
@@ -114,6 +158,14 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* Content */
+
+.content {
+    background-color: rgba(255, 255, 255, 0.521);
+    width: 100vw;
+    height: 92vh;
 }
 
 
