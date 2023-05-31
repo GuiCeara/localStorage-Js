@@ -23,6 +23,11 @@ let search_box = document.getElementById("search-box")
 let img_input = document.getElementById("img-profile")
 let drop_down = document.getElementById("drop-down")
 let exit_input = document.getElementById("exit-input")
+let look_profile_button = document.getElementById("look-profile-button")
+let image_profile = document.getElementById("look-profile")
+let close_profile_button = document.getElementById("close-button")
+let name_profile = document.getElementById("name-profile")
+let glass = document.querySelector(".glass")
 let i = 1
 
 function dropDown(drop_down, ) {
@@ -36,9 +41,6 @@ function dropDown(drop_down, ) {
 }
 
 function searchUsers(usersList,search) {
-
-    
-
    let filteredUsers = usersList.filter(user => user.user.includes(search))
 
     if (search != 0) {
@@ -90,8 +92,23 @@ function searchUsers(usersList,search) {
 
 }
 
+function viewProfile() {
+    glass.style.display = "block"
+    drop_down.style.display = "none"
+    let image = buscarData(userName, dataList)
+    image_profile.style.display = "block"
+    image_profile.style.backgroundImage = `url('${image}')`
+    name_profile.innerHTML = userName
+    close_profile_button.addEventListener("click", () => {
+        glass.style.display = "none"
+        image_profile.style.display = "none"
+    })
+}
+
 token = userToken[0]
 userName = userToken[1]
+
+
 if (!userToken[0]) {
     window.location.href = '../index.html'
     tool('Usuário não logado.', 'rgba(215,44,44,0.593)')
@@ -110,7 +127,10 @@ img_input.addEventListener("click", () => {
         localStorage.removeItem("token")
         window.location.href = '../index.html'
     }
+})
 
+look_profile_button.addEventListener("click", () => {
+    viewProfile()
 })
 
 document.addEventListener("click", (e) => {
